@@ -14,24 +14,43 @@ public class ArraysAndStreams2 {
       System.out.printf("Original strings: %s%n", Arrays.asList(strings));
 
       // strings in uppercase
-      System.out.printf("strings in uppercase: %s%n",
+      System.out.printf("Strings in uppercase: %s%n",
          Arrays.stream(strings)             
                .map(String::toUpperCase)   
                .collect(Collectors.toList()));
 
       // strings less than "n" (case insensitive) sorted ascending
-      System.out.printf("strings less than n sorted ascending: %s%n",
+      System.out.printf("Strings less than n sorted ascending: %s%n",
          Arrays.stream(strings)                            
                .filter(s -> s.compareToIgnoreCase("n") < 0)
                .sorted(String.CASE_INSENSITIVE_ORDER)
                .collect(Collectors.toList()));             
 
       // strings less than "n" (case insensitive) sorted descending
-      System.out.printf("strings less than n sorted descending: %s%n",
+      System.out.printf("Strings less than n sorted descending: %s%n",
          Arrays.stream(strings)
                .filter(s -> s.compareToIgnoreCase("n") < 0)
                .sorted(String.CASE_INSENSITIVE_ORDER.reversed())
                .collect(Collectors.toList()));
+
+      // strings that start with a vowel (case-insensitive)
+      System.out.printf("Strings that start with a vowel: %s%n",
+              Arrays.stream(strings)
+                      .filter(s -> "aeiouAEIOU".indexOf(s.charAt(0)) != -1)
+                      .sorted(String.CASE_INSENSITIVE_ORDER)
+                      .collect(Collectors.toList()));
+
+      // concatenate all the strings into a single string, separated by a comma
+      System.out.printf("Concatenate all the strings into a single string, separated by a comma: %s%n",
+              Arrays.stream(strings)
+                      .collect(Collectors.joining(", ")));
+
+      // count the number of strings that contain more than 5 characters (case-insensitive)
+      System.out.printf("Count the number of strings that contain more than 5 characters: %s%n",
+              Arrays.stream(strings)
+                      .filter(s -> s.length()> 5)
+                      .sorted(String.CASE_INSENSITIVE_ORDER)
+                      .collect(Collectors.counting()));
    }
 } 
 
